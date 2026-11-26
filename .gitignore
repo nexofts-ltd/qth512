@@ -1,0 +1,6 @@
+node_modules/
+*.bin
+bun.lockb
+.DS_Store
+__pycache__/
+dist/

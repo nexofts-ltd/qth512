@@ -1,0 +1,111 @@
+{
+  "algorithm": "QTH-512",
+  "version": "1.0",
+  "patternDefinition": "pattern(n): byte i = i mod 251, for i = 0..n-1",
+  "vectors": [
+    {
+      "name": "empty",
+      "description": "empty string",
+      "length": 0,
+      "outLen": 64,
+      "inputHex": "",
+      "leaves": 1,
+      "digest": "1fbad266ae5f92b4a15b5160d40299a8f498a7ee2ce9d6980d5d84c591d9461d55527f3083bda10ba01c29d167908775060186c433d5f3f98437f7257b221a8e"
+    },
+    {
+      "name": "abc",
+      "description": "ASCII \"abc\"",
+      "length": 3,
+      "outLen": 64,
+      "inputHex": "616263",
+      "leaves": 1,
+      "digest": "8de4f531e7217aff4c6913c147a5fed3b8e91f608f026eb393749f95717df750f9d00dd4c6c9ddb0eeb1eac325150bb195035a56e665b8b4abe5860c568f55a2"
+    },
+    {
+      "name": "abc-32",
+      "description": "ASCII \"abc\", 32-byte output",
+      "length": 3,
+      "outLen": 32,
+      "inputHex": "616263",
+      "leaves": 1,
+      "digest": "8de4f531e7217aff4c6913c147a5fed3b8e91f608f026eb393749f95717df750"
+    },
+    {
+      "name": "hello-naim",
+      "description": "ASCII \"hello naim\"",
+      "length": 10,
+      "outLen": 64,
+      "inputHex": "68656c6c6f206e61696d",
+      "leaves": 1,
+      "digest": "b0d77502544df6e9f47e3551c957cf2b4df76ea0b79cd3f983f24a06a8880ff660ed993a4741e97fe260268a61f627179df418f23c7a7f16cacab464527a25a4"
+    },
+    {
+      "name": "million-a",
+      "description": "1,000,000 × \"a\"",
+      "length": 1000000,
+      "outLen": 64,
+      "leaves": 1,
+      "digest": "c09fca7f2ed88396b6931716591d9c27b49eda450c36222f646d0c48b9455a0c7262b7063ecf4be487ee8ee278b2c385d0dc5a987e21302b6b1ae1b310029b92"
+    },
+    {
+      "name": "leaf-exact",
+      "description": "pattern(4 MiB), exactly 1 leaf",
+      "length": 4194304,
+      "outLen": 64,
+      "leaves": 1,
+      "digest": "7a7600fda5e31a2c08b4f62ce47b62901596035bf566220f41bc9ac16b6d364255dca4b7261a6acc7b3b0697c6a99e503447a15457da94e100c43a55be22a1c1"
+    },
+    {
+      "name": "leaf-plus-1",
+      "description": "pattern(4 MiB + 1), 2 leaves",
+      "length": 4194305,
+      "outLen": 64,
+      "leaves": 2,
+      "digest": "c45f2f14bb588d5afd33fa8e68b14ebd9fa6c0bbfe5aab3b198df84536a270cc173b4aa18c21dbeda348a56d2d11fee82955229b2a4d7b1506b88dfbc1f674a5"
+    },
+    {
+      "name": "block-8",
+      "description": "pattern(32 MiB), 8 leaves, D fits in 1 lattice block",
+      "length": 33554432,
+      "outLen": 64,
+      "leaves": 8,
+      "digest": "f3ed1f121b72262d44f00d8508e19abc55a800198623d04e886a7a8f913a1f387a749a2e4381bf2f321499e33af7104054c9c3506858949d70444b45e5d97f65"
+    },
+    {
+      "name": "block-9",
+      "description": "pattern(32 MiB + 1), 9 leaves, D needs 2 lattice blocks",
+      "length": 33554433,
+      "outLen": 64,
+      "leaves": 9,
+      "digest": "c76eb4124aa437fde0b69325007e63393908b0c78811bfd180edae2285de8c9bdfa1435830b7a38744016d0c06b7eefe8dcf20755bc65843c4a4d33f27186be6"
+    }
+  ],
+  "intermediates": {
+    "input": "abc",
+    "A0_first8": [
+      5406,
+      1473,
+      2612,
+      10758,
+      7068,
+      2810,
+      12250,
+      3527
+    ],
+    "A31_last8": [
+      1954,
+      10238,
+      416,
+      6232,
+      3275,
+      2391,
+      668,
+      2982
+    ],
+    "IV": "821e1faf4cc8494fccb4ba157fe31a9d7c51e2c2fb094d603bd6d0d11612f9e2a971aba1a8b5e7454942baa9cc4f019bf6a6ff2de7b8b55db61304bf6267813ac4b6d64ce61e9d17380686e89ac419e9babdb82988110502b7412f0e9d878c7196bf9901744369001abba18ab37d73fdf39513b59435da641c81c96b9d34590071e077091aef5e05557ce4969449e7fb4b3c2fe9927e4616904c405832c269edd615d0ee04d9c19b4d39b695274a4dc596891fbe72137268689d49ae3a401e0b256aa81460fa5d6f869ed2b52e9d0a829f10fd68f195e3fac13fa7d8e97776de170bc159be9559a17c78ffea0b370f77898528a90ef043234b17639f9a6235f100ce344faa071112a1a70b8397db464f3f3f5d079a63b9643d9f31da6215b70ee03dde894de7b868594d056851a2c9980ef666f755c35490c41c6f38a7f9867ec7a68c34617dffdf8db41c811c69dcd88b516d52d573826b0db1ca0a2a70c3f40d627c8a6bbb60350aed1225ba36344be1ea5bc51eb0990bb8e16f1bdf332f32ffdf72ad60477127eb3627c6954f74b63a91d2dbdc0c453522d6ed2551b17b5dcec36d1145f3b91c50b51479c7cb89d24ad78b50a2ace57a78baa212218f00be",
+    "leaf0": "6f607098c5796fcbcfd14677a03cdac733c3bfad0e85b8c2e30c0464e2cb671007605b13b77c92cb080f6c725dd895f173285ad6860a780e9034d41c64cf427c",
+    "D": "6f607098c5796fcbcfd14677a03cdac733c3bfad0e85b8c2e30c0464e2cb671007605b13b77c92cb080f6c725dd895f173285ad6860a780e9034d41c64cf427c0300000000000000",
+    "latticeState": "5f615ec3204960cf1c93d79896494c1117a3d8704bb35a322a74a90342d6748857b5675c8b552453c5a515e07cd95f254cb31beab070d1b9261f90d59b11568d6ecf6503ec29e4c5be17b7096b25261633f094b21628cfd317781a934ea164d28842afda325060e892722aa3e569ae08b2d7a468f8a29cd158bfb4f88426ff2fe6bbc90a2e7490161373cd6c09d9e022237a858fcdcf133db0302a8b1c35454d5a3a15d0160b409ef7c132d25489304c02cd35251c6b2fce36980be1490721d4b73011b0cfdc4b59a8e21318a9951a8ebeaa1dce5c64e59e0dbce66ac252d44b83219858fe512c73049b86d0581153e552a5805609e21e50c8b9ee01809e0ec005c53ed825590612beb91608fd31255c971d990930736486d54c22a77b8c745eaa61fae5f23e860bae58d7a4509c1b8e423f8568c3cd42e7e39a2faa17301b147e8a3293b81035ba1c92aff9387ba17bb391c0b80304a616aaddc2642db6f9144e471a29ad35690ff7cb98864d19022792bc13546c8ad986fc0b37826844c16ca12d8d0203b50d171a114404066467a01180d0f47a3a1ce7b953b7a08e87910d23b44e37a3c7d439a9d8a06043641be8251c700bc9c4532194f1c029222e6c8b",
+    "digest": "8de4f531e7217aff4c6913c147a5fed3b8e91f608f026eb393749f95717df750f9d00dd4c6c9ddb0eeb1eac325150bb195035a56e665b8b4abe5860c568f55a2"
+  }
+}

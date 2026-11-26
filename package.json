@@ -1,0 +1,63 @@
+{
+  "name": "qth512",
+  "version": "1.0.1",
+  "description": "Experimental 512-bit hash: SHA-512 leaves, a Ring-SIS lattice layer and SHAKE256",
+  "type": "module",
+  "main": "./dist/qth512.js",
+  "types": "./dist/qth512.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/qth512.d.ts",
+      "default": "./dist/qth512.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "SPEC.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "test": "bun test",
+    "test:node": "node test/node-smoke.mjs",
+    "prepublishOnly": "bun run build && bun test && node test/node-smoke.mjs",
+    "vectors": "bun scripts/gen-vectors.ts",
+    "bench": "bun bench/bench.ts",
+    "avalanche": "bun analysis/avalanche.ts",
+    "estimate": "python3 analysis/estimate.py",
+    "stats": "bun analysis/gen-stream.ts 12500000 stream.bin && python3 analysis/stat_tests.py stream.bin"
+  },
+  "keywords": [
+    "hash",
+    "post-quantum",
+    "lattice",
+    "ring-sis",
+    "cryptography",
+    "sha-512",
+    "shake256"
+  ],
+  "author": "Nexofts Ltd",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nexofts-ltd/qth512.git"
+  },
+  "homepage": "https://github.com/nexofts-ltd/qth512#readme",
+  "bugs": {
+    "url": "https://github.com/nexofts-ltd/qth512/issues"
+  },
+  "engines": {
+    "node": ">=20",
+    "bun": ">=1.1.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^7.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
